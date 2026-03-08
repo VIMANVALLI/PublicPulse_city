@@ -1,0 +1,210 @@
+[
+    {
+        "record_id": null,
+        "policy_id": null,
+        "description": null,
+        "date_announced": null,
+        "comment": "good",
+        "username": "user",
+        "datetime": "10/02/2026 22:22:29",
+        "type": "positive"
+    },
+    {
+        "record_id": 0,
+        "policy_id": 0,
+        "description": "",
+        "date_announced": "",
+        "comment": "",
+        "username": "user",
+        "datetime": "10/02/2026 23:54:27",
+        "type": ""
+    },
+    {
+        "record_id": "R_1gdyC25xLGlP5H1Bw",
+        "policy_id": 3889409,
+        "description": "US state Michigan creates new task force for economic and workforce to recover from the economic crisis due to COVID-19.",
+        "date_announced": "2020-05-29T00:00:00",
+        "comment": "good",
+        "username": "user",
+        "datetime": "10/02/2026 23:59:59",
+        "type": "positive"
+    },
+    {
+        "record_id": "R_vp4xmb4cOiQ3nb3NA",
+        "policy_id": 1429889,
+        "description": "At June 9th 2020 the state government of Hesse (Germany) has implemented the Good-future safeguard act which includes 12 billion for health protection, job preservation social and cultural infrastructure,  modernizing and investing in areas such as digitization and climate protection.",
+        "date_announced": "2020-06-09T00:00:00",
+        "comment": "bad",
+        "username": "user",
+        "datetime": "11/02/2026 00:08:12",
+        "type": "negative"
+    },
+    {
+        "record_id": "R_1KxVwu4XvnTKkcDCf",
+        "policy_id": 1846710,
+        "description": "Finlands Ministry of Social Affairs and Health announces 5 million EUR of discretionary funds to be granted to organisations and foundations in the health and service sector to respond to the needs for psychosocial support caused by COVID-19. The announcement was made on 28 May.The funding to be granted is allocated for 2020, but can be used until the end of 2021.",
+        "date_announced": "2020-05-28T00:00:00",
+        "comment": "good",
+        "username": "user",
+        "datetime": "11/02/2026 00:09:43",
+        "type": "positive"
+    },
+    {
+        "record_id": "R_yz7pUpTkgyVGYLvAq",
+        "policy_id": 9724038,
+        "description": "Argentina has created Programs Universidades por la Emergencia del Covid19 PULPLEC19 Joint resolution between the Ministry of Health and the Ministry of Education to promote the active collaboration of university institutions in community actions related to health care prevention and promotion in coordinations with the different public health stakeholders as well as assistance and accompaniment work for people belonging to risk groups",
+        "date_announced": "2020-07-08T00:00:00",
+        "comment": "good",
+        "username": "user",
+        "datetime": "11/02/2026 00:19:40",
+        "type": "positive"
+    },
+    {
+        "record_id": "R_RXly0xrEX2SWSY1Bw",
+        "policy_id": 9666457,
+        "description": "Canada, a new task force was announce August 5. The COVID-19 Vaccine Task Force draws on the expertise of its vaccine and immunology experts, and industry leaders with proven experience in developing and commercializing vaccines, to provide advice to the Government of Canada on COVID-19 vaccines. The task force will be in place for at least 12 months (August 5, 2021) with a subject to extension.",
+        "date_announced": "2020-08-05T00:00:00",
+        "comment": "it is a good scheem ",
+        "username": "VIMANVALLI",
+        "datetime": "11/02/2026 09:08:36",
+        "type": "positive"
+    },
+    {
+        "record_id": "R_2Ytcwe8mUK0eyh3Es",
+        "policy_id": 1924743,
+        "description": "In India, the Kerala government on 6th July made an announcement mandating face masks, social distancing until 2021",
+        "date_announced": "2020-07-05T00:00:00",
+        "comment": "it is bad scheem ",
+        "username": "admin",
+        "datetime": "11/02/2026 09:09:59",
+        "type": "negative"
+    },
+    {
+        "record_id": "R_22kWz6RdbvMhvnnNA",
+        "policy_id": 1919243,
+        "description": "Egypt will deduct 1% from people\u0192??s salaries for 12 months beginning on July 1 to offset the economic repercussions of the coronavirus, according to a draft law approved by the cabinet on May 20. A tax of 0.5% will be deducted from state pensions.",
+        "date_announced": "2020-05-20T00:00:00",
+        "comment": "it is a bad ",
+        "username": "VIMANVALLI",
+        "datetime": "11/02/2026 09:11:15",
+        "type": "negative"
+    },
+    {
+        "record_id": "R_22kWz6RdbvMhvnnNA",
+        "policy_id": 1919243,
+        "description": "Egypt will deduct 1% from people\u0192??s salaries for 12 months beginning on July 1 to offset the economic repercussions of the coronavirus, according to a draft law approved by the cabinet on May 20. A tax of 0.5% will be deducted from state pensions.",
+        "date_announced": "2020-05-20T00:00:00",
+        "comment": "it is a bad the buses only for the Ladies not students, remove the busses ladies to put the student ",
+        "recommendation": "it is a bad the buses only for the Ladies not students, remove the busses ladies to put the student ",
+        "username": "VIMANVALLI",
+        "datetime": "11/02/2026 09:46:30",
+        "type": "negative"
+    },
+    {
+        "record_id": "R_2cvEVo0nIdCrT4RNA",
+        "policy_id": 2122036,
+        "description": "At May 28th the German Bundestag decided to reduce the VAT rate for restaurant and catering services from 19 to seven percent.\u0192?? The tax reduction will apply from 1 July 2020 to 30 June 2021, with the exception of the sale of beverages.",
+        "date_announced": "2020-05-28T00:00:00",
+        "comment": "bad",
+        "recommendation": "bad",
+        "username": "VIMANVALLI",
+        "datetime": "11/02/2026 09:53:20",
+        "type": "negative"
+    },
+    {
+        "record_id": "R_1JWvN87cETmw8giDu",
+        "policy_id": 5901014,
+        "description": "On July 23 2020 in Arizona an executive oder from the governor states the Arizona Department of Health shall develop public health benchmarks for the safe return of in-person, teacher led classroom instruction and make them available no later than August 7th.",
+        "date_announced": "2020-07-23T00:00:00",
+        "comment": "it good",
+        "recommendation": "",
+        "username": "user",
+        "datetime": "11/02/2026 09:57:47",
+        "type": "positive"
+    },
+    {
+        "record_id": "R_1JWvN87cETmw8giDu",
+        "policy_id": 5901014,
+        "description": "On July 23 2020 in Arizona an executive oder from the governor states the Arizona Department of Health shall develop public health benchmarks for the safe return of in-person, teacher led classroom instruction and make them available no later than August 7th.",
+        "date_announced": "2020-07-23T00:00:00",
+        "comment": "bad",
+        "recommendation": "bad",
+        "username": "user",
+        "datetime": "11/02/2026 09:58:09",
+        "type": "negative"
+    },
+    {
+        "record_id": "R_2cvEVo0nIdCrT4RNA",
+        "policy_id": 2122036,
+        "description": "At May 28th the German Bundestag decided to reduce the VAT rate for restaurant and catering services from 19 to seven percent.\u0192?? The tax reduction will apply from 1 July 2020 to 30 June 2021, with the exception of the sale of beverages.",
+        "date_announced": "2020-05-28T00:00:00",
+        "comment": "good this",
+        "recommendation": "",
+        "username": "user",
+        "datetime": "11/02/2026 10:04:12",
+        "type": "positive"
+    },
+    {
+        "record_id": "R_3g1R4yq2nmUKY7OBc",
+        "policy_id": 271961,
+        "description": "Tamil Nadu an Indian state announced an extension of the current policy for the New Health Insurance Scheme for government employees on June 24th, 2020. This scheme was first initiated in 2016. It is directed towards all the government employees of Tamil Nadu. It will end on June 30, 2021.",
+        "date_announced": "2020-06-24T00:00:00",
+        "comment": "bad scheem ",
+        "recommendation": "bad scheem ",
+        "username": "user",
+        "datetime": "11/02/2026 10:04:25",
+        "type": "negative"
+    },
+    {
+        "record_id": "R_2cvEVo0nIdCrT4RNA",
+        "policy_id": 2122036,
+        "description": "At May 28th the German Bundestag decided to reduce the VAT rate for restaurant and catering services from 19 to seven percent.\u0192?? The tax reduction will apply from 1 July 2020 to 30 June 2021, with the exception of the sale of beverages.",
+        "date_announced": "2020-05-28T00:00:00",
+        "comment": "good",
+        "recommendation": "",
+        "username": "VIMANVALLI",
+        "datetime": "11/02/2026 10:08:07",
+        "type": "positive"
+    },
+    {
+        "record_id": "R_VVlLlmlUZf0QQIVCw",
+        "policy_id": 6414015,
+        "description": "The new academic school year will now begin on September 15 and end on June 30, according to the Minister of Education of Tunisia. A school calendar that helps bridge last years gap with this years is in process and will accommodate changes to school holiday dates and exam dates.",
+        "date_announced": "2020-08-19T00:00:00",
+        "comment": "good scheme nice ",
+        "recommendation": "",
+        "username": "VIMANVALLI",
+        "datetime": "11/02/2026 14:03:42",
+        "type": "positive"
+    },
+    {
+        "record_id": "R_2e8AWYXjoCyP3RlNA",
+        "policy_id": 8168972,
+        "description": "On March 16th, Guatemala prohibits the entry of foreigners (from any country) through any border. UPDATE: Borders are still closed with reopening planned on August 15th or later in phases",
+        "comment": "it is a bad ",
+        "rating": "1",
+        "sentiment": "negative",
+        "username": "user",
+        "datetime": "17/02/2026 18:24:41"
+    },
+    {
+        "record_id": "R_1gdyC25xLGlP5H1Bw",
+        "policy_id": 3889409,
+        "description": "US state Michigan creates new task force for economic and workforce to recover from the economic crisis due to COVID-19.",
+        "date_announced": "2020-05-29T00:00:00",
+        "comment": "bad",
+        "rating": "1",
+        "username": "VIMAN",
+        "sentiment": "negative"
+    },
+    {
+        "record_id": "R_VWmXp5CU0dQHK1PNA",
+        "policy_id": 3386408,
+        "description": "On March 13, 2020, the Parliament of Japan enacted a law amendment giving Prime Minister Shinzo Abe the power to declare a state of emergency and take drastic measures in the fight against the spread of the new coronavirus. The revised law, newly covering the coronavirus, will allow the government to declare a state of emergency to authorize governors of the 47 prefectures to place restrictions on the private rights of citizens. The law will be enforced from March 14, 2020.",
+        "date_announced": "2020-03-13T00:00:00",
+        "comment": "bad",
+        "rating": "1",
+        "username": "VIMAN",
+        "sentiment": "negative"
+    }
+]

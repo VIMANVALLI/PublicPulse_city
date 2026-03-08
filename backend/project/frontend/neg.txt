@@ -1,0 +1,67 @@
+import { useEffect, useState } from "react";
+import api from "../../services/api";
+export default function ViewPositive() {
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await api.get("/positive-feedback");
+        setRows(data || []);
+      } catch {}
+      setLoading(false);
+    };
+    fetchData();
+    window.addEventListener("opinionAdded", fetchData);
+    return () => window.removeEventListener("opinionAdded", fetchData);
+  }, []);
+  const columns = rows.length ? Object.keys(rows[0]) : [];
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-6 text-green-600">Positive Feedback</h2>
+      {loading ? (<p>Loading...</p>) : (
+        <div className="bg-white p-4 rounded shadow overflow-x-auto">
+          <table className="min-w-full border text-sm">
+            <thead><tr className="bg-green-600 text-white">{columns.map((col) => (
+                <th key={col} className="px-4 py-2 border text-left">
+                    {col}
+                </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {!rows.length ? (
+                <tr>
+                  <td colSpan={columns.length || 1} className="p-4 text-center">
+                    No positive feedback
+                  </td>
+                </tr>
+              ) : (
+                rows.map((row, i) => (
+                  <tr key={i} className="border hover:bg-gray-50">
+                    {columns.map((col) => (
+                      <td key={col} className="px-4 py-2 border">
+                        {col === "link" ? (
+                          <a
+                            href={row[col]}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-blue-600 underline"
+                          >
+                            View
+                          </a>
+                        ) : (
+                          row[col]
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}

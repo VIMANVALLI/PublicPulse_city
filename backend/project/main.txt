@@ -1,0 +1,206 @@
+from fastapi import FastAPI, Depends, UploadFile, File, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
+from database import SessionLocal, engine, Base
+import models, schemas, auth
+from passlib.context import CryptContext
+import os, json, pandas as pd
+from sentiment import get_sentiment
+
+app = FastAPI()
+pwd = CryptContext(schemes=["bcrypt"], deprecated="auto")
+Base.metadata.create_all(bind=engine)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+if not os.path.exists("uploads"):
+    os.makedirs("uploads")
+
+OP_FILE = "opinions.json"
+if not os.path.exists(OP_FILE):
+    with open(OP_FILE, "w") as f:
+        json.dump([], f)
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+# ================= LOGIN =================
+@app.post("/login")
+def login(data: schemas.Login, db: Session = Depends(get_db)):
+    if data.role == "admin":
+        if data.username == "admin" and data.password == "admin123":
+            token = auth.create_token({"username": "admin"})
+            return {"token": token}
+        raise HTTPException(401, "Invalid admin")
+    user = db.query(models.User).filter_by(username=data.username).first()
+    if not user:
+        raise HTTPException(401, "User not found")
+    if not pwd.verify(data.password[:72], user.password):
+        raise HTTPException(401, "Wrong password")
+    token = auth.create_token({"username": user.username})
+    return {"token": token}
+
+# ================= SIGNUP =================
+@app.post("/signup")
+def signup(data: schemas.Signup, db: Session = Depends(get_db)):
+    existing = db.query(models.User).filter_by(username=data.username).first()
+    if existing:
+        raise HTTPException(status_code=400, detail="Username already exists")
+    hashed = pwd.hash(data.password.strip())
+    user = models.User(
+        username=data.username,
+        email=data.email,
+        password=hashed,
+        role="user"
+    )
+    db.add(user)
+    db.commit()
+    return {"msg": "Account created"}
+
+# ================= UPLOAD DATASET =================
+@app.post("/admin/upload-dataset")
+async def upload_dataset(file: UploadFile = File(...)):
+    ext = file.filename.split(".")[-1]
+    if ext not in ["csv", "xlsx", "xls"]:
+        return {"error": "Only Excel/CSV allowed"}
+    path = f"uploads/{file.filename}"
+    with open(path, "wb") as buffer:
+        buffer.write(await file.read())
+    return {"msg": "Dataset uploaded"}
+
+# ================= VIEW DATASET =================
+@app.get("/admin/datasets")
+def view_datasets():
+    all_rows = []
+    upload_dir = os.path.join(os.getcwd(), "uploads")
+    if not os.path.exists(upload_dir):
+        return []
+    for file in os.listdir(upload_dir):
+        file_path = os.path.join(upload_dir, file)
+        try:
+            if file.endswith(".csv"):
+                df = pd.read_csv(file_path)
+            elif file.endswith(".xlsx") or file.endswith(".xls"):
+                df = pd.read_excel(file_path)
+            else:
+                continue
+            rows = df.fillna("").to_dict(orient="records")
+            for r in rows:
+                text = (
+                    r.get("text")
+                    or r.get("review")
+                    or r.get("comment")
+                    or r.get("feedback")
+                    or ""
+                )
+                rating = r.get("rating", 0)
+                r["sentiment"] = get_sentiment(rating, text)
+            all_rows.extend(rows)
+        except Exception as e:
+            print("DATASET ERROR:", e)
+    return all_rows
+
+# ================= SENTIMENT COUNTS =================
+@app.get("/sentiment-counts")
+def sentiment_counts():
+    pos = neg = neu = 0
+    upload_dir = os.path.join(os.getcwd(), "uploads")
+    if os.path.exists(upload_dir):
+        for file in os.listdir(upload_dir):
+            path = os.path.join(upload_dir, file)
+            try:
+                if file.endswith(".csv"):
+                    df = pd.read_csv(path)
+                else:
+                    df = pd.read_excel(path)
+
+                rows = df.fillna("").to_dict(orient="records")
+                for r in rows:
+                    rating = r.get("public_rating")
+                    s = get_sentiment(rating)
+
+                    if s == "positive":
+                        pos += 1
+                    elif s == "negative":
+                        neg += 1
+                    else:
+                        neu += 1
+            except:
+                pass
+    if os.path.exists(OP_FILE):
+        with open(OP_FILE, "r") as f:
+            arr = json.load(f)
+        for r in arr:
+            s = r.get("sentiment")
+            if s == "positive":
+                pos += 1
+            elif s == "negative":
+                neg += 1
+            else:
+                neu += 1
+    return {"positive": pos, "negative": neg, "neutral": neu}
+
+def get_feedback_by_type(feedback_type: str):
+    results = []
+    upload_dir = os.path.join(os.getcwd(), "uploads")
+    # ---- DATASET ----
+    if os.path.exists(upload_dir):
+        for file in os.listdir(upload_dir):
+            path = os.path.join(upload_dir, file)
+            try:
+                df = pd.read_csv(path) if file.endswith(".csv") else pd.read_excel(path)
+                rows = df.fillna("").to_dict(orient="records")
+                for r in rows:
+                    rating = r.get("public_rating")
+                    sentiment = get_sentiment(rating)
+                    if sentiment == feedback_type:
+                        r["sentiment"] = sentiment
+                        results.append(r)
+            except:
+                pass
+    # ---- USER OPINIONS ----
+    if os.path.exists(OP_FILE):
+        with open(OP_FILE, "r") as f:
+            arr = json.load(f)
+        results.extend([r for r in arr if r.get("sentiment") == feedback_type])
+    return results
+
+@app.get("/positive-feedback")
+def positive_feedback():
+    return get_feedback_by_type("positive")
+
+@app.get("/negative-feedback")
+def negative_feedback():
+    return get_feedback_by_type("negative")
+
+# ================= ADD OPINION =================
+@app.post("/user/opinion")
+def save_opinion(data: dict):
+    rating = data.get("rating")
+    comment = data.get("comment", "")
+    sentiment = get_sentiment(rating, comment)
+    data["sentiment"] = sentiment
+    with open(OP_FILE, "r") as f:
+        arr = json.load(f)
+    arr.append(data)
+    with open(OP_FILE, "w") as f:
+        json.dump(arr, f, indent=4)
+    return {"msg": "Opinion saved", "sentiment": sentiment}
+
+# ================= GRAPH =================
+@app.get("/admin/graph")
+def graph():
+    with open(OP_FILE) as f:
+        data = json.load(f)
+    pos = len([x for x in data if x["sentiment"] == "positive"])
+    neg = len([x for x in data if x["sentiment"] == "negative"])
+    neu = len([x for x in data if x["sentiment"] == "neutral"])
+    return {"positive": pos, "negative": neg, "neutral": neu}
